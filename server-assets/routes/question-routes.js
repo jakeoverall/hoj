@@ -27,7 +27,7 @@ router.post('/questions', (req, res) => {
 router.get('/questions', (req, res) => {
     //route to see all categories
 
-    Questions.find().then(questions => {
+    Questions.find().then(question => {
         res.send({
             data: question
         }).catch(err => {

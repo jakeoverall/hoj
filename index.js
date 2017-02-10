@@ -14,7 +14,7 @@ server.use(express.static(__dirname + '/public'))
 
 server.use(categoryRoutes)
 server.use(commentRoutes)
-// server.use(questionRoutes)
+server.use(questionRoutes)
 // server.use(userRoutes)
 
 
