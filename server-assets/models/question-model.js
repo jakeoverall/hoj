@@ -11,9 +11,6 @@ let schema = new Schema({
   comments: [{ type: Objectid, ref: 'Comment' }],
   votes: {},
   answer: { type: ObjectId,  ref: 'Comment' }
-
-
-
 })
 
 module.exports = mongoose.model('Question', schema)
