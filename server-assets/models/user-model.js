@@ -32,7 +32,7 @@ schema.pre('save', function (next) {
 schema.methods.validatePassword = function (password) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.password, function (err, isMatch) {
-      if (err) {
+      if (err || !isMatch) {
         return reject(err);
       }
       return resolve(isMatch);
