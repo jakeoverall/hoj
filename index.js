@@ -1,19 +1,22 @@
 let express = require('express')
 let bodyparser = require('body-parser')
 let mongoose = require('mongoose')
+const connectionString = 'mongodb://hojuser:password123@ds050869.mlab.com:50869/hoj'
+let server = express()
 let categoryRoutes = require('./server-assets/routes/category-routes')
 let commentRoutes = require('./server-assets/routes/comment-routes')
 let questionRoutes = require('./server-assets/routes/question-routes')
 let userRoutes = require('./server-assets/routes/user-routes')
 const PORT = process.env.PORT || 8080
-let server = express()
-
-const connectionString = 'mongodb://hojuser:password123@ds050869.mlab.com:50869/hoj'
-
 server.use(bodyparser.json())
 server.use(bodyparser.urlencoded({ extended: true }))
-
 server.use(express.static(__dirname + '/public'))
+
+server.use(categoryRoutes)
+server.use(commentRoutes)
+// server.use(questionRoutes)
+// server.use(userRoutes)
+
 
 
 let connection = mongoose.connection;

@@ -8,7 +8,7 @@ let schema = new Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   created: { type: String, required: true },
-  comments: [{ type: Objectid, ref: 'Comment' }],
+  comments: [{ type: ObjectId, ref: 'Comment' }],
   votes: {},
   answer: { type: ObjectId,  ref: 'Comment' }
 
