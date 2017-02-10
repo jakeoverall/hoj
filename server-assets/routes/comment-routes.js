@@ -7,11 +7,11 @@ let Comments = require("../models/comment-model")
 //post a comment
 router.post('/comments', (req, res) => {
 
-    Categories.create(req.body)
-        .then(category => {
+    Comments.create(req.body)
+        .then(comment => {
             res.send({
                 message: "You have successfully created a category ",
-                data: category
+                data: comment
             })
         })
         .catch(error => {
@@ -24,7 +24,7 @@ router.post('/comments', (req, res) => {
 })
 
 //post a vote
-router.post('/comments/:id/vote', (req, res) => {
+router.put('/comments/:id/vote', (req, res) => {
 
     Comments.findById(req.params.id)
         .then(comment => {
