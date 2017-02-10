@@ -7,6 +7,13 @@ let server = express()
 
 let Auth = require('./server-assets/routes/user-routes')
 
+function Validate(req, res, next) {
+    if (req.session.uid) {
+        return next()
+    }
+    return res.send({ error: 'Please Login or Register to continue' })
+}
+
 server.use(session)
 
 
@@ -18,7 +25,9 @@ server.use(bodyparser.urlencoded({ extended: true }))
 server.use(express.static(__dirname + '/public'))
 
 server.use(Auth)
-
+server.post('/', Validate)
+server.put('/', Validate)
+server.delete('/', Validate)
 
 let connection = mongoose.connection;
 

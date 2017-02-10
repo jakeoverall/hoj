@@ -41,6 +41,11 @@ router.post('/login', (req, res) => {
     })
 })
 
-
+router.delete('/logout', (req, res) => {
+  req.session.destroy()
+  res.send({
+    message: 'You have successfully been logged out. Please come back soon!'
+  })
+})
 
 module.exports = router;
