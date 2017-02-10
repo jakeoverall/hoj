@@ -8,12 +8,9 @@ let schema = new Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   created: { type: Number, required: true, default: Date.now() },
-  comments: [{ type: Objectid, ref: 'Comment' }],
+  comments: [{ type: ObjectId, ref: 'Comment' }],
   votes: {},
   answer: { type: ObjectId,  ref: 'Comment' }
-
-
-
 })
 
 module.exports = mongoose.model('Question', schema)

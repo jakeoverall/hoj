@@ -68,6 +68,13 @@ router.get('/categories/:id/questions/:questionId?', (req, res) => {
     }
 
 
+
+
+
+
+
+
+
     Questions.findById({
         categoryId: req.params.id
     }).then(question => {

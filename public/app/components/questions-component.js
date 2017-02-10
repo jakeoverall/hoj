@@ -1,5 +1,5 @@
 Vue.component('questions', {
-  data: function(){
+  data: function () {
     return {
       test: 'This is a test'
     }

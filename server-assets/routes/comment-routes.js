@@ -2,15 +2,19 @@ let express = require('express')
 let router = express.Router()
 //need the category model
 let Comments = require("../models/comment-model")
+let Questions = require("../models/question-model")
 
 
 //post a comment
 router.post('/comments', (req, res) => {
 
+let questionId = req.body.questionId
+
+
     Comments.create(req.body)
         .then(comment => {
             res.send({
-                message: "You have successfully created a category ",
+                message: "You have successfully created a comment (answer) ",
                 data: comment
             })
         })
