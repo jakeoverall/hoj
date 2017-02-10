@@ -12,26 +12,22 @@ let server = express()
 let Auth = require('./server-assets/routes/user-routes')
 
 function Validate(req, res, next) {
-    if (req.session.uid) {
-        return next()
+    if (req.method !== 'GET' && !req.session.uid) {
+        return res.send({ error: 'Please Login or Register to continue' })
     }
-    return res.send({ error: 'Please Login or Register to continue' })
+    return next()
 }
 
 server.use(session)
 
 const connectionString = 'mongodb://hojuser:password123@ds050869.mlab.com:50869/hoj'
-
-const PORT = process.env.PORT || 8080
 server.use(bodyparser.json())
 server.use(bodyparser.urlencoded({ extended: true }))
 server.use(express.static(__dirname + '/public'))
 
 
 server.use(Auth)
-server.post('/', Validate)
-server.put('/', Validate)
-server.delete('/', Validate)
+server.use(Validate)
 
 server.use(categoryRoutes)
 server.use(commentRoutes)

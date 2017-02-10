@@ -8,7 +8,7 @@ let Questions = require("../models/question-model")
 //post a comment
 router.post('/comments', (req, res) => {
 
-let questionId = req.body.questionId
+    let questionId = req.body.questionId
 
 
     Comments.create(req.body)
@@ -32,25 +32,23 @@ router.put('/comments/:id/vote', (req, res) => {
 
     Comments.findById(req.params.id)
         .then(comment => {
-            let currentComment = comment.votes[req.body.userId]
-            currentComment = req.body.vote
-            currentComment.save()
-                .catch(err => {
+            comment.votes[req.body.userId] = req.body.vote
+            comment.save()
+                .then(() => {
                     res.send({
-                            error: err
-                        })
-                        .then(() => {
-                            res.send({
-                                data: comment,
-                                votes: currentComment
-                            })
-                        }).catch(err => {
-                            res.send({
-                                error: err
-                            })
-                        })
-
+                        data: comment
+                    })
+                }).catch(err => {
+                    res.send({
+                        error: err
+                    })
                 })
+
+        })
+        .catch(err => {
+            res.send({
+                error: err
+            })
         })
 })
 
@@ -70,7 +68,20 @@ router.get('/comments', (req, res) => {
 })
 
 
+router.delete('/comments/:id', (req,res) =>{
 
+Comments.findByIdAndRemove(req.params.id)
+    .then(comment => {
+        res.send({
+            message: "Successfully deleted answer",
+            data: comment
+        })
+    })
+    .catch(err => {
+        res.send({
+            error: err
+        })
+    })
 
-
+})
 module.exports = router
