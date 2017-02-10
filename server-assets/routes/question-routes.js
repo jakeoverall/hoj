@@ -25,9 +25,9 @@ router.post('/questions', (req, res) => {
 })
 
 router.get('/questions', (req, res) => {
-    //route to see all categories
+    //route to see all questions
 
-    Questions.find().then(questions => {
+    Questions.find().then(question => {
         res.send({
             data: question
         }).catch(err => {
@@ -39,7 +39,7 @@ router.get('/questions', (req, res) => {
 })
 
 router.get('/questions/:id', (req, res) => {
-    //route to see specific categories
+    //route to see specific question
     Questions.findById(req.params.id).then(question => {
         res.send({
             data: question
@@ -89,25 +89,32 @@ router.get('/questions/:id', (req, res) => {
 
 // })
 
-// router.put('questions/:id', (req, res) => {
-//     Questions.findById(req.params.id).then(question => {
-//         res.send({ data: question })
-//     }).catch(err => {
-//         res.send({
-//             error: err
-//         })
-//     })
-//     Questions.votes[req.body.userId] = req.body.votes
-//     Question.Save()
-//         .then(question => {
-//             res.send({ data: question })
-//         }).catch(err => {
-//             res.send({
-//                 error: err
-//             })
-//         })
+router.put('questions/:id', (req, res) => {
 
-// })
+    Questions.findById(req.params.id)
+        .then(question => {
+            question.votes[req.body.userId] = req.body.vote
+            question.Save()
+                .then(() => {
+                    res.send({
+                        data: question
+                    })
+                }).catch(err => {
+                    res.send({
+                        error: err
+                    })
+                })
+        })
+        .catch(err => {
+            res.send({
+                error: err
+            })
+        })
+
+})
+
+
+
 
 
 
