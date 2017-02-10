@@ -1,6 +1,10 @@
 let express = require('express')
 let bodyparser = require('body-parser')
 let mongoose = require('mongoose')
+let categoryRoutes = require('./server-assets/routes/category-routes')
+let commentRoutes = require('./server-assets/routes/comment-routes')
+let questionRoutes = require('./server-assets/routes/question-routes')
+let userRoutes = require('./server-assets/routes/user-routes')
 const PORT = process.env.PORT || 8080
 let server = express()
 
