@@ -28,6 +28,7 @@ Vue.component('questions', {
     <div class="row">
     <div class="col-xs-12">
       {{questions}}
+      <question :questionId="question.id">
       </div>
     </div>
   `,
