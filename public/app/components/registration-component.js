@@ -10,6 +10,7 @@ Vue.component('registration', {
     },
     mounted() {},
     template: `
+    <div class="spacer">
     <form @submit.prevent="register" >
     <div class="form-group">
     <label for="register-user">Name </label>
@@ -23,6 +24,7 @@ Vue.component('registration', {
     </form>
     <div v-if="user._id">
     {{user.email}}
+    </div>
     </div>
   `,
     methods: {

@@ -35,8 +35,8 @@ function Store() {
     getQuestion: function (questionId) {
       return Vue.http.get('/questions/' + questionId)
     },
-    getComments: function () {
-      return Vue.http.get('/comments')
+    getCommentsByQuestionId: function () {
+      return Vue.http.get('/questions/:id')
     },
     getComment: function (commentId) {
       return Vue.http.get('/comments/' + commentId)
