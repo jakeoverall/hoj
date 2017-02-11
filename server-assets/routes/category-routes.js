@@ -23,6 +23,28 @@ router.post('/categories', (req, res) => {
 
 })
 
+router.get('/categories/:id/question', (req, res) => {
+
+
+        Questions.find({categoryId:req.params.id})
+            .then(questions => {
+              return res.send({
+                    data: questions
+                })
+            })
+            .catch(error => {
+              return res.send({
+                    error: error
+                })
+            })
+
+    
+
+
+
+})
+
+
 router.get('/categories', (req, res) => {
     //route to see all categories
 
@@ -85,20 +107,20 @@ router.get('/categories/:id/questions/:questionId?', (req, res) => {
 })
 
 
-router.delete('/categories/:id', (req,res) =>{
+router.delete('/categories/:id', (req, res) => {
 
-Categories.findByIdAndRemove(req.params.id)
-    .then(category => {
-        res.send({
-            message: "Successfully deleted category",
-            data: category
+    Categories.findByIdAndRemove(req.params.id)
+        .then(category => {
+            res.send({
+                message: "Successfully deleted category",
+                data: category
+            })
         })
-    })
-    .catch(err => {
-        res.send({
-            error: err
+        .catch(err => {
+            res.send({
+                error: err
+            })
         })
-    })
 
 })
 

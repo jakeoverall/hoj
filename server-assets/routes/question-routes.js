@@ -11,7 +11,7 @@ router.post('/questions', (req, res) => {
     Questions.create(req.body)
         .then(question => {
             res.send({
-                message: "You have successfully created a question ",
+                message: "You have successfully created a question",
                 data: question
             })
         })
