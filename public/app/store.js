@@ -10,7 +10,11 @@ function Store(){
       return Vue.http.post('/register', {"name" : username , "email" : email , "password" : password})
     },
     loginUser: function (email, password) {
-      return Vue.http.post('/login', {"email" : username , "password" : password})
+      Vue.http.post('/login', {"email" : email , "password" : password}).then(res => {
+         
+         return this.user = res.data.data
+
+      })
     },
     getCategories : function () {
      return Vue.http.get('/categories')
