@@ -26,42 +26,49 @@ var x = Vue.component('home', {
 var router = new VueRouter({
   routes: [{
       name: 'Home',
-      path: '',
+      path: '/',
       component: x
     },
     {
       name: 'Registration',
-      path: 'register',
+      path: '/register',
       component: {
         template: '<registration></registration>'
       }
     },
     {
       name: 'Login',
-      path: 'login',
+      path: '/login',
       component: {
         template: '<navbar></navbar>'
       }
     },
     {
       name: 'Questions',
-      path: 'questions',
+      path: '/questions',
       component: {
         template: '<questions></questions>'
       }
     },
     {
       name: 'Question',
-      path: 'questions/:questionId',
+      path: '/questions/:questionId',
       component: {
         template: '<question></question>'
       }
     },
     {
       name: 'Categories',
-      path: 'categories',
+      path: '/categories',
       component: {
         template: '<categories></categories>'
+      }
+    },
+    {
+      name: 'Category',
+      path: '/categories/:id',
+      component: {
+        template: '<category></category>'
       }
     }
   ]

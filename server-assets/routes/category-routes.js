@@ -23,22 +23,24 @@ router.post('/categories', (req, res) => {
 
 })
 
-router.get('/categories/:id/question', (req, res) => {
+router.get('/categories/:id/questions', (req, res) => {
 
 
-        Questions.find({categoryId:req.params.id})
-            .then(questions => {
-              return res.send({
-                    data: questions
-                })
+    Questions.find({
+            categoryId: req.params.id
+        })
+        .then(questions => {
+            return res.send({
+                data: questions
             })
-            .catch(error => {
-              return res.send({
-                    error: error
-                })
+        })
+        .catch(error => {
+            return res.send({
+                error: error
             })
+        })
 
-    
+
 
 
 

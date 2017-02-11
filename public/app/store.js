@@ -41,6 +41,9 @@ function Store() {
     getComment: function (commentId) {
       return Vue.http.get('/comments/' + commentId)
     },
+    getQuestionsByCategory(catId){
+      return Vue.http.get('/categories/'+ catId + '/questions')
+    },
     postCategories: function (category) {
       return Vue.http.post('/categories', category)
     },
