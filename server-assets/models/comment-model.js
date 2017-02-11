@@ -7,7 +7,7 @@ let schema = new Schema({
   questionId: { type: ObjectId, ref: 'Question', required: true },
   body: { type: String, required: true },
   created: { type: Number, required: true, default: Date.now() },
-  votes: { }
+  votes: { type: Object, default: {} }
   
 })
  

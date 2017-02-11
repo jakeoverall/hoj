@@ -28,11 +28,11 @@ router.post('/comments', (req, res) => {
 })
 
 //post a vote
-router.put('/comments/:id/vote', (req, res) => {
+router.put('/comments/:commentId/votes', (req, res) => {
 
-    Comments.findById(req.params.id)
+    Comments.findById(req.params.commentId)
         .then(comment => {
-            comment.votes[req.body.userId] = req.body.vote
+            comment.votes[req.session.uid] = req.body.votes
             comment.save()
                 .then(() => {
                     res.send({
@@ -51,6 +51,32 @@ router.put('/comments/:id/vote', (req, res) => {
             })
         })
 })
+
+
+router.put('/comments/:commentId', (req, res) => {
+
+    Comments.findById(req.params.commentId)
+        .then(comment => {
+            comment.body = req.body.body
+            comment.save()
+                .then(() => {
+                    res.send({
+                        data: comment
+                    })
+                }).catch(err => {
+                    res.send({
+                        error: err
+                    })
+                })
+
+        })
+        .catch(err => {
+            res.send({
+                error: err
+            })
+        })
+})
+
 
 
 router.get('/comments', (req, res) => {
