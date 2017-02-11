@@ -37,7 +37,8 @@ var app = new Vue({
   router: router,
   data: function () {
     return {
-      store: store
+      store: store,
+      test: 'test'
     }
   }
 })
