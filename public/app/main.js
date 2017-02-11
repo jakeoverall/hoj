@@ -1,5 +1,10 @@
+var store = new Store()
 
 var app = new Vue({
   el: '#app',
-  sharedState: new Store()
+  data: function (){
+    return {
+      store: store
+    }
+  }
 })

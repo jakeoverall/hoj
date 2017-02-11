@@ -68,12 +68,12 @@ router.delete('/questions/:id', (req, res) => {
         })
 })
 
-router.put('/questions/:id/vote', (req, res) => {
+router.put('/questions/:id/votes', (req, res) => {
 
     Questions.findById(req.params.id)
         .then(question => {
-            question.votes[req.body.userId] = req.body.vote
-            question.Save()
+            question.votes[req.session.uid] = req.body.votes
+            question.save()
                 .then(() => {
                     res.send({
                         data: question
@@ -97,7 +97,7 @@ router.put('/questions/:id', (req, res) => {
     Questions.findById(req.params.id)
         .then(question => {
             question.body = req.body.body
-            question.Save()
+            question.save()
                 .then(() => {
                     res.send({
                         data: question

@@ -7,7 +7,7 @@ function Store(){
   }
   this.actions = {
     getQuestions: function(){
-
+      return Vue.http.get('/questions')
     }
   }
 }
