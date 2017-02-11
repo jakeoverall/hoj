@@ -21,7 +21,13 @@ Vue.component('questions', {
     this.$root.$data.store.actions.getQuestions().then(response => {
       this.questions = response.data.data
     })
-    // this.sortNewQuestions(this.questions)
+    // this.sortNe
+    
+    
+    
+    
+    
+    wQuestions(this.questions)
   },
   template: `
     <div class="container">
