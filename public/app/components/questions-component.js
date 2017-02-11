@@ -20,46 +20,48 @@ Vue.component('questions', {
 
       })
       },
-  template: `<div class="container">
+  template: `
   <div>
-  <div class="panel panel-default">
-  <div class="panel-heading">
-  <p>Ask a question</p>
-    <form @submit.prevent="askQuestion">
-    <button type="submit">Ask a question</button>
-      <input type="text" v-model="title">
-      <textarea class="form-control" rows="2" id="comment" v-model="body"></textarea>
-      <select class="form-control" v-model="categorySelector">
-       <option v-for="category in categoriesReturned" >{{category.name}}</option>
-      
-    </form>
-   
-    </div>
-  </div>
-  <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3>Questions</h3>
-            <ul class="nav nav-tabs">
-              <li role="presentation" class="active"><a @click="recentQuestions">New</a></li>
-              <li role="presentation"><a @click="sortAnsweredQuestions">Answered</a></li>
-              <li role="presentation"><a href="#">Trending</a></li>
-            </ul>
-          </div>
-          <div class="panel-body">
-            <div v-for="question in activeQuestions">
-              <router-link :to="'/questions/'+question._id">
-                {{question.title}}
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="col-md-5 col-md-offset-3" style="padding: 5% 0 5% 0;">
+ 
+              <h2>Ask a question</h2>
+              <form @submit.prevent="askQuestion">
+              <button type="submit">Ask a question</button>
+                <input type="text" v-model="title" placeholder="Title: try to be descriptive">
+                <textarea class="form-control" rows="2" id="comment" v-model="body" placeholder="Enter your question here, try to be as descriptive
+                as possible"></textarea>
+                <p>Select a category *required<p>
+                <select class="form-control" v-model="categorySelector" value="Select a category">
+              
+                <option v-for="category in categoriesReturned" >{{category.name}}</option>
+                
+              </form>
+   
     
+              </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+        
+         
+                  <h3>Questions</h3>
+                  <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a @click="recentQuestions">New</a></li>
+                    <li role="presentation"><a @click="sortAnsweredQuestions">Answered</a></li>
+                    <li role="presentation"><a href="#">Trending</a></li>
+                  </ul>
+         
+          
+                  <div v-for="question in activeQuestions">
+                    <router-link :to="'/questions/'+question._id">
+                      {{question.title}}
+                    </router-link>
+                    </div>
+            
+          
+          </div>
+      </div> 
   </div>`,
   methods: {
     askQuestion: function () {

@@ -13,18 +13,13 @@ Vue.component('categories', {
     // this.sortNewCategories(this.categories)
   },
   template: `
-    <div class="container">
-       <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div v-for="category in categories">
-                            <router-link :to="'/categories/'+category._id">{{category.name}}</router-link>
+    <div>
+                    <p><strong>Current Categories</strong></p>
+                    <div v-for="category in categories">
+                    <ul style="list-style-type:none;display:inline-block;">
+                    <li><router-link :to="'/categories/'+category._id">{{category.name}}</router-link></li>
+                   
                     </div>
-            </div>
-       </div>
-        </div>
-       </div>
     </div>
   `,
   methods: {
