@@ -4,29 +4,33 @@ Vue.component('login', {
             registrationMessage: '',
             username : '',
             email : '',
-            password : ''
+            password : '',
+            user: {}
         }
     },
     mounted() {
     },
     template: `
-    
-    
     <form @submit.prevent="register" >
     <input type="text" v-model="username" placeholder="name">
     <input type="text" v-model="email" placeholder="email">
     <input type="text" v-model="password" placeholder="password">
     <button type="submit">sign up!</button>
-
-    <div v-if="registrationMessage">
-    {{registrationMessage}}
+    <div v-if="user._id">
+    {{user}}
     </div>
   `,
     methods: {
         register: function () {
-            this.$root.$data.store.actions.registerUser().then(response => {
-                this.registrationMessage = response.data.data
-                console.log(response.data.data)
+            this.$root.$data.store.actions.registerUser(this.username, this.email, this.password).then(response => {
+                this.user = response.data.data
+                if(user.error){
+                    return console.log(user.error)
+                }
+                
+                this.$router.push('/questions')
+
+
                 this.username = ''
                 this.email = ''
                 this.password = ''

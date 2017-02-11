@@ -1,12 +1,14 @@
 Vue.component('question', {
-  props: ['questionId'],
   data: function () {
     return {
       question: {}
     }
   },
   mounted() {
-    this.$root.$data.store.actions.getQuestion(this.questionId).then(response => {
+
+    var qId = this.$route.params.questionId
+
+    this.$root.$data.store.actions.getQuestion(qId).then(response => {
       this.question = response.data.data
     })
     // this.sortNewQuestions(this.questions)
@@ -15,9 +17,8 @@ Vue.component('question', {
     <div class="container">
     <div class="row">
     <div class="col-xs-12">
-      {{questions}}
+      {{question}}
       </div>
-      <comments :questionId="">
     </div>
   `,
   methods: {
@@ -43,29 +44,25 @@ Vue.component('question', {
 
 })
 
+// new Vue ({
+//     el:'#question',
+//     data:{
+//         dummypath: new DummyStore,
+//         comments: [],
+//         text: ''
+//     },
+//     methods:{
+//         addComment: (comment) => this.comments.push(comment),
+//         toggleVote: (userId, num) => {
+//             if( userval === bval){
+//                 return userval = 0
+//             }
+//             else {
+//                 return userval = bval
+//             }
+//         }
+//     }
 
 
 
-
-new Vue ({
-    el:'#question',
-    data:{
-        dummypath: new DummyStore,
-        comments: [],
-        text: ''
-    },
-    methods:{
-        addComment: (comment) => this.comments.push(comment),
-        toggleVote: (userId, num) => {
-            if( userval === bval){
-                return userval = 0
-            }
-            else {
-                return userval = bval
-            }
-        }
-    }
-
-
-
-})
+// })

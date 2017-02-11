@@ -27,8 +27,8 @@ Vue.component('questions', {
     <div class="container">
     <div class="row">
     <div class="col-xs-12">
-      {{questions}}
-      <question :questionId="question.id">
+      <div v-for="question in questions">
+        <router-link :to="'/questions/'+question._id">{{question.title}}</router-link>
       </div>
     </div>
   `,

@@ -1,15 +1,18 @@
-new Vue ({
-    el:'#navbar',
-    data:{
-        dummyStore: new DummyStore,
-        login: {},
-        searchBar: 'link search component',
-        catagories: []
+Vue.component('navbar', {
+    data: function () {
+        return {
+            login: {},
+            searchBar: 'link search component',
+            catagories: []
+        }
     },
-    mounted(){
+    template: `
+        <h1>THIS IS THE NAVBAR</h1>
+    `,
+    mounted() {
         //fetch data from db
     },
-    methods:{
+    methods: {
         onclickLogin: () => ('take us to the login prompt'),
         onclickCatagories: () => ('display list of catagories')
     }
