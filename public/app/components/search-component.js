@@ -5,36 +5,45 @@ Vue.component('search', {
       searchString: '',
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.$root.$data.store.actions.getQuestions().then(response => {
       this.questions = response.data.data
     })
   },
 
-    template: `
-    <div class="container">
-    <div class="row">
+  template: `
+<div class="container">
+  <div class="row">
     <ul>
-               
-        <li>
-                <p>{{filteredAnswers}}</p>
-        </li>
+      <label for="search-entry">Search </label>
+      <input type="text" id="" v-model="searchString" placeholder="search for" required>
+      <li v-for="question in filteredQuestions">
+        <router-link :to="'/questions/'+question._id">
+          {{question.title}}
+        </router-link>
+      </li>
     </ul>
-      
-    </div>
-    </div>
+
+  </div>
+</div>
   `,
 
-    methods: {
-        // filteredAnswers: function () { 
-        //     searchString = searchString.trim().toLowerCase();
-        //     ans_array = ans_array.filter(function(item){
-        //         if(item.title.toLowerCase().indexOf(searchString) !== -1){
-        //             return item;
-        //         }
-        //     })
-        // }
-    },
+  computed: {
+    filteredQuestions: function () {
+
+      var questArray = this.questions
+      var userQuery = this.searchString
+      if (userQuery.length > 0) {
+        userQuery = userQuery.trim().toLowerCase();
+        questArray = questArray.filter(function (item) {
+          if (item.title.toLowerCase().indexOf(userQuery) !== -1) {
+            return item;
+          }
+        })
+        return questArray;
+      }
+    }
+  },
 })
 
 

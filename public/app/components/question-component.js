@@ -1,7 +1,8 @@
 Vue.component('question', {
   data: function () {
     return {
-      question: {}
+      question: {},
+      comments: []
     }
   },
   mounted() {
@@ -10,16 +11,29 @@ Vue.component('question', {
 
     this.$root.$data.store.actions.getQuestion(qId).then(response => {
       this.question = response.data.data
+      this.comments = this.question.comments
     })
     // this.sortNewQuestions(this.questions)
   },
   template: `
-    <div class="container">
-    <div class="row">
-    <div class="col-xs-12">
-      {{question}}
+
+ <div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>{{question.title}}</h2>
+      </div>
+      <div class="panel-body">
+        <h3>Question: {{question.body}}</h3>
+      </div>
+      <div v-for="comment in comments">
+        {{question.title}}
+        </router-link>
       </div>
     </div>
+  </div>
+</div>
+
   `,
   methods: {
     //get info from 
