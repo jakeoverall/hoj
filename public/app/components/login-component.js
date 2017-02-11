@@ -11,13 +11,17 @@ Vue.component('login', {
     mounted() {
     },
     template: `
-    <form @submit.prevent="register" >
-    <input type="text" v-model="username" placeholder="name">
-    <input type="text" v-model="email" placeholder="email">
-    <input type="text" v-model="password" placeholder="password">
-    <button type="submit">sign up!</button>
-    <div v-if="user._id">
-    {{user}}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form" @submit.prevent="register" >
+            <input type="text" v-model="username" placeholder="name">
+            <input type="text" v-model="email" placeholder="email">
+            <input type="text" v-model="password" placeholder="password">
+            <button type="submit">sign up!</button>
+            <div v-if="user._id">
+            {{user}}
+            </div>
+        </div>
     </div>
   `,
     methods: {

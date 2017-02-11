@@ -1,8 +1,21 @@
 var store = new Store()
 
 var x = Vue.component('home', {
-  template: `
-    TESTING 123
+  template: ` 
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <login></login>
+        </div>
+        <div class="col-sm-9">
+          <login></login>
+        </div>
+      </div>
+    <div>
+
+
+
     <search></search>
     <questions></questions>
     <question></question>
