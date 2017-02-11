@@ -35,7 +35,7 @@ function Store() {
     getQuestion: function (questionId) {
       return Vue.http.get('/questions/' + questionId)
     },
-    getCommentsByQuestionId: function () {
+    getCommentsByQuestionId: function (questionId) {
       return Vue.http.get('/questions/:id')
     },
     getComment: function (commentId) {
@@ -52,6 +52,9 @@ function Store() {
     },
     getAuthentication: function () {
       return Vue.http.get('/authenticate')
+    },
+    postComment: function (questionId, body) {
+      return Vue.http.post('/comments', {questionId: questionId, body: body})
     }
   }
 }
