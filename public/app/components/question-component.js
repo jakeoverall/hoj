@@ -7,7 +7,9 @@ Vue.component('question', {
       userId: "342342",
       voteCounts: {},
       comments: [],
-      commentBody : ''
+      commentBody : '',
+      answer : {},
+      userAnswered : false
     }
   },
   mounted() {
@@ -43,6 +45,15 @@ Vue.component('question', {
           <button type="submit" class="btn btn-default">Post Question</button>
       </div>
     </div>
+      <div class="row">
+      <div class="col-xs-12" style="padding-top:5%;">
+      <div class="panel panel-default" v-if="userAnswered">
+      <div class="panel-body" >
+      {{answer}}
+      </div>
+      </div>
+      </div>
+      </div>
   </div>
 
 
@@ -60,9 +71,10 @@ Vue.component('question', {
     },
     postCommment : function () {
       var qId = this.$route.params.questionId
-debugger
       this.$root.$data.store.actions.postComment(qId, this.commentBody).then(response => {
-      console.log(response.data.data)
+      this.answer = response.data.data.body
+      this.userAnswered = true
+      this.commentBody = ''
       })
     },
     
