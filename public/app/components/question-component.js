@@ -39,6 +39,7 @@ Vue.component('question', {
     </div>
   </div>
 </div>
+<comments></comments>
 
   `,
 

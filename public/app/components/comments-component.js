@@ -8,8 +8,8 @@ Vue.component('comments', {
   },
   mounted() {
     this.$root.$data.store.actions.getCommentsByQuestionId().then(response => {
-        
-        this.comments = response.data.data.comments
+        this.questionId = response.data.data.userId
+        this.comments = response.data.data
       })
  },
   template: `
@@ -21,18 +21,21 @@ Vue.component('comments', {
           </div>
         </div>
       </div>
-      <form @submit.prevent="">
+      <div>
+      <form @submit.prevent="something">
         <button type="submit">Sumbit an Answer</button>
-        <textarea class="form-control" rows="2" id="comment" v-model="body"></textarea>
+        <textarea class="form-control" rows="2" v-model="body"></textarea>
+      </form>
+      </div>
         
 
     
   `,
   methods: {
     postComment: function(){
-      this.$root.$data.store.actions.postComment(questionId, body){
-        this.questionId = 
-      }
+      this.$root.$data.store.actions.postComment(questionId, body) 
+        questionId = this.questionId
+        body = this.body
     }
     
   }
