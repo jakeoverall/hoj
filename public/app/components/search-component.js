@@ -26,14 +26,14 @@ Vue.component('search', {
   `,
 
     methods: {
-        filteredAnswers: function () { 
-            searchString = searchString.trim().toLowerCase();
-            ans_array = ans_array.filter(function(item){
-                if(item.title.toLowerCase().indexOf(searchString) !== -1){
-                    return item;
-                }
-            })
-        }
+        // filteredAnswers: function () { 
+        //     searchString = searchString.trim().toLowerCase();
+        //     ans_array = ans_array.filter(function(item){
+        //         if(item.title.toLowerCase().indexOf(searchString) !== -1){
+        //             return item;
+        //         }
+        //     })
+        // }
     },
 })
 
