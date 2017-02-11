@@ -9,7 +9,7 @@ let schema = new Schema({
   body: { type: String, required: true },
   created: { type: Number, required: true, default: Date.now() },
   comments: [{ type: ObjectId, ref: 'Comment' }],
-  votes: {type: Object, default: {}},
+  votes: {type: Object, default: 0},
   answer: { type: ObjectId,  ref: 'Comment' }
 })
 

@@ -1,4 +1,5 @@
-function Store(){
+function Store() {
+  var store = this
   this.state = {
     questions: [],
     comments: [],
@@ -7,26 +8,31 @@ function Store(){
   }
   this.actions = {
     registerUser: function (username, email, password) {
-      return Vue.http.post('/register', {"name" : username , "email" : email , "password" : password})
+      return Vue.http.post('/register', {
+        "name": username,
+        "email": email,
+        "password": password
+      })
     },
     loginUser: function (email, password) {
-      debugger
-      return Vue.http.post('/login', {"email" : email , "password" : password})
+      return Vue.http.post('/login', {
+        "email": email,
+        "password": password
+      })
     },
     logOut: function () {
-      debugger
       return Vue.http.delete('/logout')
     },
-    getCategories : function () {
-     return Vue.http.get('/categories')
+    getCategories: function () {
+      return Vue.http.get('/categories')
     },
-    getCategory : function (categoryId) {
+    getCategory: function (categoryId) {
       return Vue.http.get('/categories/' + categoryId)
     },
-    getQuestions: function(){
+    getQuestions: function () {
       return Vue.http.get('/questions')
     },
-    getQuestion: function(questionId){
+    getQuestion: function (questionId) {
       return Vue.http.get('/questions/' + questionId)
     },
     getComments: function () {
@@ -35,9 +41,14 @@ function Store(){
     getComment: function (commentId) {
       return Vue.http.get('/comments/' + commentId)
     },
-    postCategories : function (category) {
-      return Vue.http.post('/categories',category)
+    postCategories: function (category) {
+      return Vue.http.post('/categories', category)
+    },
+    postQuestion: function (categoryId, title, body) {
+      return Vue.http.post('/', category)
+    },
+    getAuthentication: function () {
+      return Vue.http.get('/authenticate')
     }
-
   }
 }

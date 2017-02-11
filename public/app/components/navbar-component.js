@@ -5,10 +5,8 @@ Vue.component('navbar', {
             searchBar: 'link search component',
             email: '',
             password: '',
-            username : '',
-            user : {},
-            loggedin : false
-
+            username: '',
+            loggedin: false
         }
     },
     template: `
@@ -30,7 +28,7 @@ Vue.component('navbar', {
                     <li><a href="/questions">Ask a question</a>
                     </li>
                     <div v-if="loggedin">
-                    <li ><a href="#">Logged in as: {{user.email}}</a>
+                    <li >Logged in as: {{user.email}}</a>
                     </li>
                     </div>
                 </ul>
@@ -48,7 +46,7 @@ Vue.component('navbar', {
                 </div>
                 <div v-else>
                 <ul class="nav navbar-nav">
-                <li ><a href="/">Log Out</a>
+                <li ><a @click="logMeOut" href="/">Log Out</a>
                     </li>
                     </ul>
                 </div>
@@ -58,19 +56,24 @@ Vue.component('navbar', {
 </div>
     `,
     mounted() {
-        //fetch data from db
+        this.$root.$data.store.actions.getAuthentication().then(res => {
+            this.loggedin = true
+            this.user = res.data.data
+        }) 
     },
     methods: {
-        logUserIn : function () {
-            debugger
+        logUserIn: function () {
             this.$root.$data.store.actions.loginUser(this.email, this.password).then(response => {
-                debugger
-                
                 this.user = response.data.data
                 this.loggedin = true
                 console.log(response)
             }).catch(err => {
                 console.log(err)
+            })
+        },
+        logMeOut: function () {
+            this.$root.$data.store.actions.loginUser(this.email, this.password).then(response => {
+                console.log(response)
             })
         }
     }
