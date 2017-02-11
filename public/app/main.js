@@ -4,21 +4,22 @@ var x = Vue.component('home', {
   template: ` 
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-          
+      <div class="row" style="padding-top:12%;">
+        <div class="col-md-6">
+          <categories></categories>
         </div>
-        <div class="col-sm-9">
-        
-        </div>
+          <div class="col-md-6">
+            <search></search>
+          </div>
       </div>
+      <questions></questions>
     <div>
 
 
 
-    <search></search>
-    <categories></categories>
-    <questions></questions>
+    
+    
+    
 `
 })
 

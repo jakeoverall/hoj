@@ -27,10 +27,9 @@ Vue.component('navbar', {
                     </li>
                     <li><a href="/#/questions">Ask a question</a>
                     </li>
-                    <div v-if="loggedin">
-                    <li >Logged in as: {{user.email}}</a>
+                    <li v-if="loggedin"><a href="#">Logged in as: {{user.email}}</a>
                     </li>
-                    </div>
+        
                 </ul>
                 <div v-if="!loggedin">
                 <form class="navbar-form navbar-right" role="search" @submit.prevent="logUserIn">

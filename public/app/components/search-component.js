@@ -12,10 +12,9 @@ Vue.component('search', {
   },
 
   template: `
-<div class="container">
-  <div class="row">
-    <ul>
-      <label for="search-entry">Search </label>
+<div>
+    <ul style="list-style-type:none;">
+      <label for="search-entry">Search Questions</label>
       <input type="text" id="" v-model="searchString" placeholder="search for" required>
       <li v-for="question in filteredQuestions">
         <router-link :to="'/questions/'+question._id">
@@ -24,7 +23,7 @@ Vue.component('search', {
       </li>
     </ul>
 
-  </div>
+ 
 </div>
   `,
 

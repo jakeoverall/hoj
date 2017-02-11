@@ -5,3 +5,11 @@
 .showLogin {
     display:none;
 }
+
+body {
+    background-color: #507abf;
+}
+
+.container {
+    background-color: white;
+}
