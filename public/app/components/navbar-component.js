@@ -72,7 +72,7 @@ Vue.component('navbar', {
             })
         },
         logMeOut: function () {
-            this.$root.$data.store.actions.logOut(this.email, this.password).then(response => {
+            this.$root.$data.store.actions.loginUser(this.email, this.password).then(response => {
                 console.log(response)
             })
         }
