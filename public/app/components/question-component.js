@@ -3,13 +3,17 @@ Vue.component('question', {
     return {
       question: {},
       comments: [],
-      voteObj: {count: 0},
-      userId: "342342",
+      counter: { count: '', userId: '' },
+      voteObj: {},
+      userId: '',
       voteCounts: {},
       comments: [],
-      commentBody : '',
-      answer : {},
-      userAnswered : false
+      commentBody: '',
+      answer: {},
+      userAnswered: false,
+      totalCount: 0,
+      negativeCount: 0,
+      postiveCount: 0,
     }
   },
   mounted() {
@@ -18,7 +22,12 @@ Vue.component('question', {
     this.$root.$data.store.actions.getQuestion(qId).then(response => {
       this.question = response.data.data
       this.comments = this.question.comments
-      this.voteObj = this.question.votes
+      this.counter.count = this.question.votes
+      this.counter.userId = this.question.userId
+      this.userId = this.question.userId
+    
+
+      // console.log(this.voteObj)
     })
     // this.sortNewQuestions(this.questions)
   },
@@ -58,50 +67,68 @@ Vue.component('question', {
 
 
   `,
-// <comments></comments>
+  // <comments></comments>
   methods: {
     //get info from 
-    vote: function(value) {
-      this.voteObj.count = this.voteObj.count || 0
-      this.voteObj.count++
-      if (value == this.voteObj[this.userId]) {
+    vote: function (value) {
+
+      // console.log(this.voteObj)
+      this.counter.count = this.counter.count || 0
+      this.counter.count++
+      if (value == this.counter[this.userId]) {
         return this.voteObj[this.userId] = 0
       }
-        return this.voteObj[this.userId] = value
+      return this.voteObj[this.userId] = value
     },
-    postCommment : function () {
+    postCommment: function () {
       var qId = this.$route.params.questionId
       this.$root.$data.store.actions.postComment(qId, this.commentBody).then(response => {
-      this.answer = response.data.data.body
-      this.userAnswered = true
-      this.commentBody = ''
+        this.answer = response.data.data.body
+        this.userAnswered = true
+        this.commentBody = ''
       })
-    },
-    
-
+    }
+ },
     computed: {
+   
       voteCounts: function () {
-       this.voteObj.count 
-        var totalCount = 0
-        var negativeCount = 0
-        var postiveCount = 0;
-        for (var userId in this.voteObj) {
-          if (this.voteObj[userId]) {
+        this.counter.count
+        debugger
+        var voted = 0
+         for (var user in this.voteObj) {
+          if (this.voteObj[this.userId]) {
 
-            var vote = this.voteObj[userId]
-            postiveCount += vote > 0? 1:0
-            negativeCount += vote < 0? 1:0
-        
+            var vote = this.voteObj[this.userId]
+            this.postiveCount += vote > 0? 1:0
+            console.log(this.voteObj[this.userId])
+            if (vote > 0 && voted == 0){
+              this.positiveCount++
+            } else if (vote < 0 && voted == 0){
+              this.negativeCount++
+            }
+            this.negativeCount += vote < 0? 1:0
+            console.log(this.userId)
+      console.log(vote)
+            // switch (vote) {
+
+            //   case 1:
+            //     this.positiveCount++
+            //     this.totalCount++
+            //     break;
+            //   case -1:
+            //     this.totalCount++
+            //     this.negativeCount++
+            //     break;
+            // }
 
           }
         }
-        totalCount = postiveCount + negativeCount
-        return { pos: postiveCount, neg: negativeCount, total: totalCount }
+         this.totalCount = this.postiveCount + this.negativeCount
+        console.log(this.postiveCount)
+        return { pos: this.postiveCount, neg: this.negativeCount, total: this.totalCount }
       }
     }
-  }
-
-})
+  })
 
 
 
