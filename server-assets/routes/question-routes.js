@@ -1,6 +1,6 @@
 let express = require('express')
 let router = express.Router()
-//need the category model
+
 let Categories = require("../models/category-model")
 let Questions = require("../models/question-model")
 let Comments = require("../models/comment-model")
@@ -24,6 +24,8 @@ router.post('/questions', (req, res) => {
 
 })
 
+
+
 router.get('/questions', (req, res) => {
     //route to see all questions
 
@@ -39,7 +41,7 @@ router.get('/questions', (req, res) => {
 })
 
 router.get('/questions/:id', (req, res) => {
-    //route to see specific question
+    //route to see specific question by id
     Questions.findById(req.params.id).then(question => {
         res.send({
             data: question
@@ -52,44 +54,21 @@ router.get('/questions/:id', (req, res) => {
     })
 })
 
-// router.get('/categories/:id/questions/:questionId?', (req, res) => {
+router.delete('/questions/:id', (req, res) => {
+    Questions.findByIdAndRemove(req.params.id)
+        .then(question => {
+            res.send({
+                message: 'You have successfully deleted question',
+                data: question
+            }).catch(err => {
+                res.send({
+                    error: err
+                })
+            })
+        })
+})
 
-//     //route to see all questions within categories or specific question
-//     let CategoryId = req.params.id
-
-//     if (req.params.questionId) {
-//         Questions.findById(req.params.questionId)
-//             .then(questions => {
-//                 return res.send({
-//                     data: questions
-//                 })
-//             }).catch(err => {
-//                 res.send({
-//                     error: err
-//                 })
-//             })
-
-
-//     }
-
-
-//     Questions.findById({
-//         categoryId: req.params.id
-//     }).then(question => {
-//         res.send({
-//             data: question
-//         }).catch(err => {
-//             res.send({
-//                 error: err
-//             })
-//         })
-
-
-//     })
-
-// })
-
-router.put('questions/:id', (req, res) => {
+router.put('/questions/:id/vote', (req, res) => {
 
     Questions.findById(req.params.id)
         .then(question => {
@@ -113,12 +92,29 @@ router.put('questions/:id', (req, res) => {
 
 })
 
+router.put('/questions/:id', (req, res) => {
 
+    Questions.findById(req.params.id)
+        .then(question => {
+            question.body = req.body.body
+            question.Save()
+                .then(() => {
+                    res.send({
+                        data: question
+                    })
+                }).catch(err => {
+                    res.send({
+                        error: err
+                    })
+                })
+        })
+        .catch(err => {
+            res.send({
+                error: err
+            })
+        })
 
-
-
-
-
+})
 
 
 
