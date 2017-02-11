@@ -1,25 +1,44 @@
-new Vue ({
-    el:'#comments',
-    data:{
-        newpath: new DummyStore,
-        correctObj: {}
-    },
-    methods: {
-        correctAnswer: (commentId) => 
-        {
-        var tempObj = 
-        this.newpath.arr.find(comment => {return comment.id === commentId})
-        this.correctObj = tempObj
-
-        }
+Vue.component('comments', {
+  data: function () {
+    return {
+      comments: [],
+      questionId: '',
+      body: ''
+    }
+  },
+  mounted() {
+    this.$root.$data.store.actions.getCommentsByQuestionId().then(response => {
+        this.questionId = response.data.data.userId
+        this.comments = response.data.data
+      })
+ },
+  template: `
+      <div class="panel panel-default">
+        <div v-for="comment in comments">
+          <div class="panel-body">
+            {{comment.votes}}
+            {{comment.body}}
+          </div>
+        </div>
+      </div>
+      <div>
+      <form @submit.prevent="something">
+        <button type="submit">Sumbit an Answer</button>
+        <textarea class="form-control" rows="2" v-model="body"></textarea>
+      </form>
+      </div>
         
-    },
-    computed:{
-        comments(){
-            this.newpath.comments
-        },
-    },
+
     
+  `,
+  methods: {
+    postComment: function(){
+      this.$root.$data.store.actions.postComment(questionId, body) 
+        questionId = this.questionId
+        body = this.body
+    }
+    
+  }
 
 
 })
