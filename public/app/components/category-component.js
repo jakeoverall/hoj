@@ -15,7 +15,7 @@ Vue.component('category', {
   },
   template: `
     <div class="container">
-      <h1>{{category.name}}</hr>
+      <h1>{{category.name}}</h1>
       <div class="row">
         <div class="col-xs-12">
           <div class="panel panel-default">

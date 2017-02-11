@@ -19,7 +19,6 @@ var x = Vue.component('home', {
     <search></search>
     <categories></categories>
     <questions></questions>
-    <question></question>
   `
 })
 
