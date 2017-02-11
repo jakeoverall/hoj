@@ -14,7 +14,7 @@ Vue.component('category', {
     })
   },
   template: `
-    <div class="container">
+    <div class="container spacer">
     <br><br>
         <h1>HELLO WORLS</hr>
        <div class="row">
