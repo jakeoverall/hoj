@@ -3,14 +3,9 @@ var store = new Store()
 var x = Vue.component('home', {
   template: ` 
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-          
-        </div>
-        <div class="col-sm-9">
-        
-        </div>
+    <div class="container spacer">
+      <div class="row ">
+       
       </div>
     <div>
 
