@@ -12,10 +12,12 @@ Vue.component('questions', {
     })
   },
   template: `
+  <br>
+  <br>
+  <br>
     <div class="container">
             <div class="row">
-              <div class="col-xs-12">
-                <div class="panel panel-default">
+              <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3>Questions</h3>
                     <ul class="nav nav-tabs">
@@ -40,14 +42,14 @@ Vue.component('questions', {
   methods: {
     //get info from 
     addQuestion: function (question) { this.questions.push(question) },
-    // vote:(voteValue, userId) => this.questions[i].push(question),
+    
     recentQuestions: function () {
       this.activeQuestions = this.questions.sort((a, b) => {
         return b.created - a.created
       })
     },
     sortAnsweredQuestions: function(){
-      debugger
+  
       var ansArr = []
       var copy = this.questions.slice(1, this.questions.length)
         for (var i = 0; i < copy.length; i++ ){
@@ -58,5 +60,8 @@ Vue.component('questions', {
           return this.activeQuestions = ansArr
         }
     }
+  },
+  computed:{
+     vote: function (voteValue, userId) { this.questions[i].push(question)},
   }
 })
