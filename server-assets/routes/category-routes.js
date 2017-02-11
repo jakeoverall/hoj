@@ -68,13 +68,6 @@ router.get('/categories/:id/questions/:questionId?', (req, res) => {
     }
 
 
-
-
-
-
-
-
-
     Questions.findById({
         categoryId: req.params.id
     }).then(question => {
@@ -91,6 +84,23 @@ router.get('/categories/:id/questions/:questionId?', (req, res) => {
 
 })
 
+
+router.delete('/categories/:id', (req,res) =>{
+
+Categories.findByIdAndRemove(req.params.id)
+    .then(category => {
+        res.send({
+            message: "Successfully deleted category",
+            data: category
+        })
+    })
+    .catch(err => {
+        res.send({
+            error: err
+        })
+    })
+
+})
 
 
 module.exports = router
