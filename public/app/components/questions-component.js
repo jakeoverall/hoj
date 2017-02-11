@@ -24,8 +24,11 @@ Vue.component('questions', {
     // this.sortNewQuestions(this.questions)
   },
   template: `
-    <div>
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
       {{questions}}
+      </div>
     </div>
   `,
   methods: {
