@@ -5,27 +5,35 @@ Vue.component('questions', {
       activeQuestions: [],
       title: '',
       body: '',
-      categoriesReturned: []
+      categoriesReturned: {},
+      categorySelector: ''
     }
   },
   mounted() {
     this.$root.$data.store.actions.getQuestions().then(response => {
-      this.questions = response.data.data
-      this.activeQuestions = this.questions
-    }),
-    this.$root.$data.store.actions.getCategories().then(response => {
-      this.categoriesReturned.push(response.data.data)
-    })
+        this.questions = response.data.data
+        this.activeQuestions = this.questions
+      }),
+      this.$root.$data.store.actions.getCategories().then(response => {
+        this.categoriesReturned = response.data.data
+
+      })
   },
   template: `<div class="container">
   <div>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+  <p>Ask a question</p>
     <form @submit.prevent="askQuestion">
+    <button type="submit">Ask a question</button>
       <input type="text" v-model="title">
-      <textarea class="form-control" rows="5" id="comment" v-model="body"></textarea>
-      <select class="form-control" id="sel1" v-model="categorySelector" v-for="categories in categoriesReturned">
-    <select>{{categories}}</select>
-      <button type="submit">Ask a question</button>
+      <textarea class="form-control" rows="2" id="comment" v-model="body"></textarea>
+      <select class="form-control" v-model="categorySelector">
+       <option v-for="category in categoriesReturned" >{{category.name}}</option>
+      
     </form>
+   
+    </div>
   </div>
   <div class="container">
     <div class="row">
@@ -53,27 +61,47 @@ Vue.component('questions', {
     
   </div>`,
   methods: {
-    askQuestion : function () {
+    askQuestion: function () {
+      var catId = ''
+      var flag = false
+      for (var i = 0; i < this.categoriesReturned.length; i++) {
+        var name = this.categoriesReturned[i];
+       
+        if (name.name === this.categorySelector) {
+           catId = name._id
+           break
+        }
+
+      }
+     
+      this.$root.$data.store.actions.postQuestion(catId, this.title, this.body).then(res => {
+  
+        this.title = ''
+        this.body = ''
+      })
+
     },
     //get info from 
-    addQuestion: function (question) { this.questions.push(question) },
+    addQuestion: function (question) {
+      this.questions.push(question)
+    },
     // vote:(voteValue, userId) => this.questions[i].push(question),
     recentQuestions: function () {
       this.activeQuestions = this.questions.sort((a, b) => {
         return b.created - a.created
       })
     },
-    sortAnsweredQuestions: function(){
+    sortAnsweredQuestions: function () {
       debugger
       var ansArr = []
       var copy = this.questions.slice(1, this.questions.length)
-        for (var i = 0; i < copy.length; i++ ){
-          var inst = copy[i]
-          if(inst.answer){
-            ansArr.push(inst)
-          }
-          return this.activeQuestions = ansArr
+      for (var i = 0; i < copy.length; i++) {
+        var inst = copy[i]
+        if (inst.answer) {
+          ansArr.push(inst)
         }
+        return this.activeQuestions = ansArr
+      }
     }
   }
 })

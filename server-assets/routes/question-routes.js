@@ -8,6 +8,9 @@ let Comments = require("../models/comment-model")
 
 router.post('/questions', (req, res) => {
 
+req.body.userId = req.session.uid
+console.log(req.body)
+
     Questions.create(req.body)
         .then(question => {
             res.send({

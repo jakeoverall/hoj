@@ -45,7 +45,7 @@ function Store() {
       return Vue.http.post('/categories', category)
     },
     postQuestion: function (categoryId, title, body) {
-      return Vue.http.post('/', category)
+      return Vue.http.post('/questions', {categoryId : categoryId, title: title, body: body })
     },
     getAuthentication: function () {
       return Vue.http.get('/authenticate')
