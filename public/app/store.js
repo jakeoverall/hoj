@@ -1,4 +1,5 @@
-function Store(){
+function Store() {
+  var store = this
   this.state = {
     questions: [],
     comments: [],
@@ -7,36 +8,50 @@ function Store(){
   }
   this.actions = {
     registerUser: function (username, email, password) {
-      return Vue.http.post('/register', {"name" : username , "email" : email , "password" : password})
-    },
-    loginUser: function (email, password) {
-      Vue.http.post('/login', {"email" : email , "password" : password}).then(res => {
-         
-         return this.user = res.data.data
-
+      return Vue.http.post('/register', {
+        "name": username,
+        "email": email,
+        "password": password
       })
     },
-    getCategories : function () {
-     return Vue.http.get('/categories')
+    loginUser: function (email, password) {
+      return Vue.http.post('/login', {
+        "email": email,
+        "password": password
+      })
     },
-    getCategory : function (categoryId) {
+    logOut: function () {
+      return Vue.http.delete('/logout')
+    },
+    getCategories: function () {
+      return Vue.http.get('/categories')
+    },
+    getCategory: function (categoryId) {
       return Vue.http.get('/categories/' + categoryId)
     },
-    getQuestions: function(){
+    getQuestions: function () {
       return Vue.http.get('/questions')
     },
-    getQuestion: function(questionId){
+    getQuestion: function (questionId) {
       return Vue.http.get('/questions/' + questionId)
     },
-    getComments: function () {
-      return Vue.http.get('/comments')
+    getCommentsByQuestionId: function () {
+      return Vue.http.get('/questions/:id')
     },
     getComment: function (commentId) {
       return Vue.http.get('/comments/' + commentId)
     },
-    postCategories : function (category) {
-      return Vue.http.post('/categories',category)
+    getQuestionsByCategory(catId){
+      return Vue.http.get('/categories/'+ catId + '/questions')
+    },
+    postCategories: function (category) {
+      return Vue.http.post('/categories', category)
+    },
+    postQuestion: function (categoryId, title, body) {
+      return Vue.http.post('/questions', {categoryId : categoryId, title: title, body: body })
+    },
+    getAuthentication: function () {
+      return Vue.http.get('/authenticate')
     }
-
   }
 }

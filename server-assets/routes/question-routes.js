@@ -8,10 +8,13 @@ let Comments = require("../models/comment-model")
 
 router.post('/questions', (req, res) => {
 
+req.body.userId = req.session.uid
+console.log(req.body)
+
     Questions.create(req.body)
         .then(question => {
             res.send({
-                message: "You have successfully created a question ",
+                message: "You have successfully created a question",
                 data: question
             })
         })

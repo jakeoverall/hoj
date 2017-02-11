@@ -55,4 +55,17 @@ router.delete('/logout', (req, res) => {
   })
 })
 
+
+router.get('/authenticate', (req,res) => {
+  Users.findById(req.session.uid).then(user => {
+    return res.send ({
+      data: user
+    })
+  }).catch(err=>{
+    return res.send({
+      error:err 
+    })
+  })
+})
+
 module.exports = router;

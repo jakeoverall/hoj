@@ -15,6 +15,7 @@ function Validate(req, res, next) {
     if (req.method !== 'GET' && !req.session.uid) {
         return res.send({ error: 'Please Login or Register to continue' })
     }
+    
     return next()
 }
 
