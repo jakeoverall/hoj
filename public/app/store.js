@@ -50,11 +50,12 @@ function Store() {
     postQuestion: function (categoryId, title, body) {
       return Vue.http.post('/questions', {categoryId : categoryId, title: title, body: body })
     },
+    postComment: function (questionId, body) {
+      return Vue.http.post('/comments', {questionId: questionId, body: body})
+    },
     getAuthentication: function () {
       return Vue.http.get('/authenticate')
     },
-    postComment: function (questionId, body) {
-      return Vue.http.post('/comments', {questionId: questionId, body: body})
-    }
+    
   }
 }

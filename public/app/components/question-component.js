@@ -4,7 +4,10 @@ Vue.component('question', {
       question: {},
       comments: [],
       voteObj: {count: 0},
-      userId: "342342"
+      userId: "342342",
+      voteCounts: {},
+      comments: [],
+      commentBody : ''
     }
   },
   mounted() {
@@ -19,30 +22,32 @@ Vue.component('question', {
   },
 
   template: `
-
- <div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12" style="padding-top:15%;">
         <h2>{{question.title}}</h2>
-      </div>
-      <div class="panel-body">
-        <h3>Question: {{question.body}}</h3>
+        <h3>{{question.body}}</h3>
         {{question.votes}}
         <i @click="vote(1)" class="fa fa-thumbs-up" aria-hidden="true"></i> {{voteCounts.pos}}
         <i @click="vote(-1)" class="fa fa-thumbs-down" aria-hidden="true"></i> {{voteCounts.neg}}
+        <div v-for="comment in comments">
+          {{question.title}}
+        </div>
       </div>
-      <div v-for="comment in comments">
-        {{question.title}}
-        </router-link>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Post an answer</h2>
+        <form @submit.prevent="postCommment">
+          <textarea rows=" 3" cols="50" v-model="commentBody"></textarea>
+          <button type="submit" class="btn btn-default">Post Question</button>
       </div>
     </div>
   </div>
-</div>
-<comments></comments>
+
 
   `,
-
+// <comments></comments>
   methods: {
     //get info from 
     vote: function(value) {
@@ -52,6 +57,13 @@ Vue.component('question', {
         return this.voteObj[this.userId] = 0
       }
         return this.voteObj[this.userId] = value
+    },
+    postCommment : function () {
+      var qId = this.$route.params.questionId
+debugger
+      this.$root.$data.store.actions.postComment(qId, this.commentBody).then(response => {
+      console.log(response.data.data)
+      })
     },
     
 
@@ -67,16 +79,7 @@ Vue.component('question', {
             var vote = this.voteObj[userId]
             postiveCount += vote > 0? 1:0
             negativeCount += vote < 0? 1:0
-            // switch (vote) {
-            //   case 1:
-            //    positiveCount++
-            //     totalCount++
-            //     break;
-            //   case -1:
-            //     totalCount++
-            //     negativeCount++
-            //     break;
-            // }
+        
 
           }
         }
@@ -87,3 +90,6 @@ Vue.component('question', {
   }
 
 })
+
+
+

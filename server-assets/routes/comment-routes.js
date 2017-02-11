@@ -7,7 +7,7 @@ let Questions = require("../models/question-model")
 
 //post a comment
 router.post('/comments', (req, res) => {
-
+    req.body.userId = req.session.uid
     let questionId = req.body.questionId
 
 
