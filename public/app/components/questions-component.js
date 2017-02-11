@@ -23,16 +23,17 @@ Vue.component('questions', {
   template: `
   <div>
     <div class="row">
-          <div class="col-md-5 col-md-offset-2" style="padding: 5% 0 5% 0;">
+          <div class="col-md-5 col-md-offset-3" style="padding: 5% 0 5% 0;">
  
-              <p>Ask a question</p>
+              <h2>Ask a question</h2>
               <form @submit.prevent="askQuestion">
               <button type="submit">Ask a question</button>
                 <input type="text" v-model="title" placeholder="Title: try to be descriptive">
                 <textarea class="form-control" rows="2" id="comment" v-model="body" placeholder="Enter your question here, try to be as descriptive
                 as possible"></textarea>
+                <p>Select a category *required<p>
                 <select class="form-control" v-model="categorySelector" value="Select a category">
-                <option value="Please select a category" selected>Please select a category</option>
+              
                 <option v-for="category in categoriesReturned" >{{category.name}}</option>
                 
               </form>

@@ -14,6 +14,7 @@ Vue.component('categories', {
   },
   template: `
     <div>
+                    <p><strong>Current Categories</strong></p>
                     <div v-for="category in categories">
                     <ul style="list-style-type:none;display:inline-block;">
                     <li><router-link :to="'/categories/'+category._id">{{category.name}}</router-link></li>
