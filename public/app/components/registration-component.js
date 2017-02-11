@@ -10,23 +10,49 @@ Vue.component('registration', {
     },
     mounted() {},
     template: `
-    <div class="spacer">
-    <form @submit.prevent="register" >
-    <div class="form-group">
-    <label for="register-user">Name </label>
-    <input type="text" id="register-user" v-model="username" placeholder="name" required>
-    <label for="register-user-email">Name </label>
-    <input type="email" id="register-user-email" v-model="email" placeholder="email" required>
-    <label for="register-user-password">Name </label>
-    <input type="password" id="register-user-password" v-model="password" placeholder="password" required>
-    <button type="submit">sign up!</button>
+<div class="spacer">
+
+<h1 class="text-center"> Register as a new user</h1>
+
+    <form class="form-horizontal" @submit.prevent="register">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Email">
     </div>
-    </form>
-    <div v-if="user._id">
-    {{user.email}}
+  </div>
+  
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-6">
+      <input type="email" class="form-control" v-model="email" id="inputEmail3" placeholder="Email">
     </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-6">
+      <input type="password" class="form-control" id="inputPassword3" v-model="password" placeholder="Password">
     </div>
-  `,
+  </div>
+  <div class="col-sm-8">
+  <button type="submit" class="btn btn-large btn-default" style="float:right;">sign up!</button>
+  </div>
+  </form>
+</div>
+
+ 
+  `
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  ,
     methods: {
         register: function () {
             this.$root.$data.store.actions.registerUser(this.username, this.email, this.password).then(response => {
