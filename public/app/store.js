@@ -6,6 +6,12 @@ function Store(){
     user: {}
   }
   this.actions = {
+    registerUser: function (username, email, password) {
+      return Vue.http.post('/register', {"name" : username , "email" : email , "password" : password})
+    },
+    loginUser: function (email, password) {
+      return Vue.http.post('/login', {"email" : username , "password" : password})
+    },
     getCategories : function () {
      return Vue.http.get('/categories')
     },
