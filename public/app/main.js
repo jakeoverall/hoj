@@ -26,7 +26,7 @@ var router = new VueRouter({
   routes: [
     { name: 'Home', path: '/', component: x },
     { name: 'Registration', path: '/register', component: { template: '<registration></registration>' } },
-    { name: 'Login', path: '/register', component: { template: '<registration></registration>' } },
+    { name: 'Login', path: '/login', component: { template: '<navbar></navbar>' } },
     { name: 'Questions', path: '/questions', component: { template: '<questions></questions>' } },
     { name: 'Question', path: '/questions/:questionId', component: { template: '<question></question>' } }
   ]

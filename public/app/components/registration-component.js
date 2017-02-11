@@ -10,8 +10,6 @@ Vue.component('registration', {
     },
     mounted() {},
     template: `
-    
-    
     <form @submit.prevent="register" >
     <div class="form-group">
     <label for="register-user">Name </label>
