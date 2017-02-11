@@ -66,33 +66,32 @@ Vue.component('questions', {
       var flag = false
       for (var i = 0; i < this.categoriesReturned.length; i++) {
         var name = this.categoriesReturned[i];
-       
+
         if (name.name === this.categorySelector) {
-           catId = name._id
-           break
+          catId = name._id
+          break
         }
 
       }
-     
+
       this.$root.$data.store.actions.postQuestion(catId, this.title, this.body).then(res => {
-  
+
         this.title = ''
         this.body = ''
       })
 
     },
     //get info from 
+
     addQuestion: function (question) {
       this.questions.push(question)
     },
-    // vote:(voteValue, userId) => this.questions[i].push(question),
     recentQuestions: function () {
       this.activeQuestions = this.questions.sort((a, b) => {
         return b.created - a.created
       })
     },
     sortAnsweredQuestions: function () {
-      debugger
       var ansArr = []
       var copy = this.questions.slice(1, this.questions.length)
       for (var i = 0; i < copy.length; i++) {
@@ -103,5 +102,10 @@ Vue.component('questions', {
         return this.activeQuestions = ansArr
       }
     }
+  },
+  computed: {
+    vote: function (voteValue, userId) {
+      this.questions[i].push(question)
+    },
   }
 })

@@ -25,7 +25,7 @@ Vue.component('navbar', {
                 <ul class="nav navbar-nav">
                     <li ><a href="/">Home</a>
                     </li>
-                    <li><a href="/questions">Ask a question</a>
+                    <li><a href="/#/questions">Ask a question</a>
                     </li>
                     <div v-if="loggedin">
                     <li >Logged in as: {{user.email}}</a>
