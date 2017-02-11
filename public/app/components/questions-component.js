@@ -1,60 +1,62 @@
-// Vue.component('questions', {
-//   data: function(){
-//     return {
-//       test: 'This is a test'
-//     }
-//   },
-//   template: `
-//     <div>
-//       {{test}}
-//     </div>
-//   `
-// })
-
 Vue.component('questions', {
   data: function () {
     return {
       questions: [],
+      activeQuestions: []
     }
   },
   mounted() {
     this.$root.$data.store.actions.getQuestions().then(response => {
       this.questions = response.data.data
+      this.activeQuestions = this.questions
     })
-    // this.sortNewQuestions(this.questions)
   },
   template: `
     <div class="container">
-    <div class="row">
-    <div class="col-xs-12">
-      <div v-for="question in questions">
-        <router-link :to="'/questions/'+question._id">{{question.title}}</router-link>
-      </div>
-    </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3>Questions</h3>
+                    <ul class="nav nav-tabs">
+                      <li role="presentation" class="active"><a @click="recentQuestions">New</a></li>
+                      <li role="presentation"><a @click="sortAnsweredQuestions">Answered</a></li>
+                      <li role="presentation"><a href="#">Trending</a></li>
+                    </ul>
+                  </div>
+                  <div class="panel-body">
+                    <div v-for="question in activeQuestions">
+                      <router-link :to="'/questions/'+question._id">
+                        {{question.title}}
+                      </router-link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>     
   `,
   methods: {
     //get info from 
-    questionById: (questionId) => { dummypath.getquestion(questionId) },
-    addQuestion: (question) => this.questions.push(question),
+    addQuestion: function (question) { this.questions.push(question) },
     // vote:(voteValue, userId) => this.questions[i].push(question),
-    recentQuestions: (questions) => questions.sort(),
-    sortNewQuestions: (questions) => questions.sort((a, b) => {
-      if (path === true) {
-        return banana.created - apple.created
-      }
-    }),
-    sortAnsweredQuestions: (questions) => questions.sort((a, b) => {
-      if (path === false) {
-        return banana.created - apple.created
-      }
-    }),
-
-
+    recentQuestions: function () {
+      this.activeQuestions = this.questions.sort((a, b) => {
+        return b.created - a.created
+      })
+    },
+    sortAnsweredQuestions: function(){
+      debugger
+      var ansArr = []
+      var copy = this.questions.slice(1, this.questions.length)
+        for (var i = 0; i < copy.length; i++ ){
+          var inst = copy[i]
+          if(inst.answer){
+            ansArr.push(inst)
+          }
+          return this.activeQuestions = ansArr
+        }
+    }
   }
-
-
 })
-
-/*
-Questions will be the full list
-*/
