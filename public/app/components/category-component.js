@@ -14,7 +14,7 @@ Vue.component('category', {
     })
   },
   template: `
-
+        <div>
       <h1>{{category.name}}</h1>
          <div class="panel panel-default">
             <div class="panel-body">
@@ -22,6 +22,7 @@ Vue.component('category', {
                 <router-link :to="'/questions/'+question._id">{{question.title}}</router-link>
               </div>
             </div>
+          </div>
           </div>
   `,
   methods: {

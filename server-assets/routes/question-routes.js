@@ -8,8 +8,8 @@ let Comments = require("../models/comment-model")
 
 router.post('/questions', (req, res) => {
 
-req.body.userId = req.session.uid
-console.log(req.body)
+    req.body.userId = req.session.uid
+    console.log(req.body)
 
     Questions.create(req.body)
         .then(question => {
@@ -47,8 +47,8 @@ router.get('/questions/:id', (req, res) => {
     //route to see specific question by id
     Questions.findById(req.params.id).then(question => {
         res.send({
-            data: question
-        })
+                data: question
+            })
             .catch(err => {
                 res.send({
                     error: err
@@ -94,6 +94,27 @@ router.put('/questions/:id/votes', (req, res) => {
         })
 
 })
+
+
+router.get('/questions/:id/comments', (req, res) => {
+
+    Comments.find({
+            questionId: req.params.id
+        })
+        .then(comments => {
+            res.send({
+                    data: comments
+                })
+
+                .catch(err => {
+                    res.send({
+                        error: err
+                    })
+                })
+
+        })
+})
+
 
 router.put('/questions/:id', (req, res) => {
 

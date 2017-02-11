@@ -52,20 +52,7 @@ Vue.component('question', {
       }
         return this.voteObj[this.userId] = value
     },
-    questionById: (questionId) => { dummypath.getquestion(questionId) },
-    addQuestion: (question) => this.questions.push(question),
-    // vote:(voteValue, userId) => this.questions[i].push(question),
-    recentQuestions: (questions) => questions.sort(),
-    sortNewQuestions: (questions) => questions.sort((a, b) => {
-      if (path === true) {
-        return banana.created - apple.created
-      }
-    }),
-    sortAnsweredQuestions: (questions) => questions.sort((a, b) => {
-      if (path === false) {
-        return banana.created - apple.created
-      }
-    })},
+    
 
     computed: {
       voteCounts: function () {
@@ -98,4 +85,4 @@ Vue.component('question', {
     }
   }
 
-)
+})
