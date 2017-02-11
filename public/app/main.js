@@ -17,6 +17,7 @@ var x = Vue.component('home', {
 
 
     <search></search>
+    <categories></categories>
     <questions></questions>
     <question></question>
   `
@@ -28,7 +29,8 @@ var router = new VueRouter({
     { name: 'Registration', path: '/register', component: { template: '<registration></registration>' } },
     { name: 'Login', path: '/login', component: { template: '<navbar></navbar>' } },
     { name: 'Questions', path: '/questions', component: { template: '<questions></questions>' } },
-    { name: 'Question', path: '/questions/:questionId', component: { template: '<question></question>' } }
+    { name: 'Question', path: '/questions/:questionId', component: { template: '<question></question>' } },
+    { name: 'Categories', path: '/categories', component: { template: '<categories></categories>' } }
   ]
 })
 
