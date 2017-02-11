@@ -6,10 +6,10 @@ var x = Vue.component('home', {
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <login></login>
+          <registration></registration>
         </div>
         <div class="col-sm-9">
-          <login></login>
+        
         </div>
       </div>
     <div>
@@ -26,7 +26,8 @@ var x = Vue.component('home', {
 var router = new VueRouter({
   routes: [
     { name: 'Home', path: '/', component: x },
-    { name: 'Login', path: '/login', component: { template: '<login></login>' } },
+    { name: 'Registration', path: '/register', component: { template: '<registration></registration>' } },
+    { name: 'Login', path: '/register', component: { template: '<registration></registration>' } },
     { name: 'Questions', path: '/questions', component: { template: '<questions></questions>' } },
     { name: 'Question', path: '/questions/:questionId', component: { template: '<question></question>' } },
     { name: 'Categories', path: '/categories', component: { template: '<categories></categories>' } }
